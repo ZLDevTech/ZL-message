@@ -1,0 +1,105 @@
+/* Modal */
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal .contentInput,
+.modal .contentInputMobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    margin: 0 auto;
+    padding: 20px;
+    position: fixed;
+    border-radius: 2rem;
+    border: 0.3rem solid rgba(0, 0, 0, 0.514);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+/* Título e descrição */
+.modal h3, .modal span {
+    text-align: center;
+}
+
+/* Botão Fechar */
+.closeDesck, .closeMobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.623);
+    float: right;
+    font-size: 4rem;
+    transition: 0.3s;
+}
+
+.closeDesck:hover, .closeMobile:hover {
+    color: #ff204e;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Input de número */
+.inputNumber, .inputNumberMobile {
+    text-align: center;
+    height: 3rem;
+    border: 0.2rem solid rgba(0, 0, 0, 0.514);
+    border-radius: 1rem;
+    outline: none;
+}
+
+.inputNumber:focus, .inputNumberMobile:focus {
+    border: 0.3rem solid rgba(0, 0, 0, 0.514);
+}
+
+/* Botões */
+.contentInput button, .contentInputMobile button {
+    cursor: pointer;
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 25px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.contentInput button:hover, .contentInputMobile button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background-color: #329435;
+}
+
+/* Mobile */
+.contentInputMobile {
+    width: 80%;
+}
+
+.inputNumberMobile {
+    width: 90%;
+    -webkit-text-size-adjust: 100%; /* Evita que o teclado mude o tamanho da fonte */
+}
+
+.contentInputMobile button {
+    width: 80%;
+    height: 3.5rem;
+    border-radius: 3rem;
+    font-size: 1.7rem;
+    background-color: #06c270;
+}
+
+.contentInputMobile button:hover {
+    background-color: #329435;
+}

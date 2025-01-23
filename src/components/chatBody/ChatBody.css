@@ -1,0 +1,35 @@
+.containerChatBody{
+    flex: 1;
+    background-color: #efeae2;
+    background-size: contain;
+    overflow-y: auto;
+    margin-bottom: 6.2rem;
+    &::-webkit-scrollbar{
+        width: 0.6rem;
+        border-radius: 1rem; 
+    }
+    
+    &::-webkit-scrollbar-thumb{
+        border-radius: 1rem;
+        background-color: rgba(0,0,0,0.2);
+    }
+}
+
+
+/*Mobile*/
+
+.containerChatBodyMobile{
+    flex: 1;
+    background-color: #efeae2;
+    overflow-y: auto;
+    margin-bottom: 6.2rem;
+    &::-webkit-scrollbar{
+        width: 0.6rem;
+        border-radius: 1rem; 
+    }
+    
+    &::-webkit-scrollbar-thumb{
+        border-radius: 1rem;
+        background-color: rgba(0,0,0,0.2);
+    }
+}

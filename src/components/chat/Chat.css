@@ -1,0 +1,26 @@
+.containerChat{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 78vw;
+    margin-top: 5rem;
+}
+
+.containerChatMobile{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.ChatFooder{
+    position: fixed;
+    bottom: 0;
+    width: 78vw;
+    /* border: 1px solid red; */
+}
+
+.ChatFooderMobile{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

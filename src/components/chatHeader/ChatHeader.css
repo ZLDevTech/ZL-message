@@ -1,0 +1,112 @@
+.containerChatHeader{
+    height: 5rem;
+    padding: 3rem 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0.1rem 0.2rem #0003;
+}
+
+.userInfo{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.userInfo img, .avatarInfo{
+    width: 3rem;
+    height: 3rem;
+    background-color: #ffffff;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.nameContent{
+    display: grid;
+}
+
+.nameChatHeader /*span*/{
+    font-size: 1.5rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.numberChatHeader{
+    font-size: 1.6rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.avatarChatHeader /*img*/ {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.optionsChatHeader{
+    display: flex;
+    gap: 1rem;
+}
+
+.optionsChatHeader svg{
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+}
+
+
+/*Mobile*/
+
+.containerChatHeaderMobile{
+    height: 5.9rem;
+    background-color: #b8b8b8de;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 0.1rem 0.2rem #0003;
+    z-index: 1;
+}
+
+.userInfoMobile{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.userInfoMobile img, .avatarInfoMobile{
+    max-width: 3rem;
+    max-height: 3rem;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+.nameContentMobile{
+    display: grid;
+}
+
+.nameChatHeaderMobile /*span*/{
+    font-size: 1.5rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.avatarChatHeaderMobile /*img*/ {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    min-width: fit-content;
+}
+
+.optionsChatHeaderMobile{
+    display: flex;
+    gap: 1rem;
+}
+
+.optionsChatHeaderMobile svg{
+    width: 2.4rem;
+    height: 2.4rem;
+    cursor: pointer;
+}

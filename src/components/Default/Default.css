@@ -1,0 +1,112 @@
+.containerDefault{
+    width: 100%;
+    background-color: #bebebe57;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    margin-top: 5rem;
+}
+
+.containerDefaultNight{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    margin-top: 5rem;
+    color: white;
+}
+
+.cityInfo{
+    max-width: 30rem;
+    background-color: rgba(204, 204, 204, 0.562);
+    border-radius: 1rem;
+    position: absolute;
+    right: 2%;
+    top: 12%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.permissaoLocal{
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.temperatura{
+    font-size: 1.9rem;
+}
+
+.cityName{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.containerDefault::before {
+    content: "";
+    width: 100%;
+    background-image: url('https://www.papeiseparede.com.br/3257-thickbox_default/papel-de-parede-whatsapp-branco-e-azul.jpg.webp');
+    background-size: contain;
+    opacity: 0.2; /* Altere o valor conforme necessário */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1; /* Garante que o pseudo-elemento esteja atrás do conteúdo */
+}
+
+.containerDefaultNight::before{
+    content: "";
+    width: 100%;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGk7AUboWxoesi54sV9_ByLJsdOZJ6PR_2jg&s');
+    background-size: contain;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1; /* Garante que o pseudo-elemento esteja atrás do conteúdo */
+}
+
+.img svg{
+    width: 10rem;
+    height: 10rem;
+    color: rgb(3, 194, 51);
+}
+
+.titleDefaultNight, .titleDefaultMorning, .titleDefaultAfternoon /*h1*/ {
+    text-align: center;
+    font-size: 4rem;
+    transition: 0.5s;
+}
+
+.infoDefault /*span*/{
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    max-width: 50rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.infoDefault svg{
+    width: 3rem;
+    height: 3rem;
+}
+
+.infoDefault span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

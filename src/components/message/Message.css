@@ -1,0 +1,75 @@
+.custom-modal-content {
+width: 80%;
+height: 80%;
+overflow: auto;
+background-color: white;
+border-radius: 10px;
+max-width: 60rem;
+object-fit: cover;
+&::-webkit-scrollbar{
+    width: 0.5rem;
+    border-radius: 5rem; 
+}
+
+&::-webkit-scrollbar-thumb{
+    border-radius: 1rem;
+    background-color: rgba(0, 0, 0, 0.432);
+}
+}
+
+.custom-modal-overlay {
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(0, 0, 0, 0.61);
+display: flex;
+justify-content: center;
+align-items: center;
+backdrop-filter: blur(100rem);
+}
+
+.custom-modal-content img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.modal-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 30rem;
+    max-height: 30rem;
+}
+
+.buttonDownloadFiles{
+    padding: 0.5rem;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.pdfFile{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1.4rem;
+    color: rgb(0, 18, 117);
+}
+
+.fileGeneric{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(202, 202, 202, 0.637);
+}
+
+.fileGeneric p{
+    color: rgb(136, 152, 163);
+    font-style: italic;
+    font-weight: bolder;
+}

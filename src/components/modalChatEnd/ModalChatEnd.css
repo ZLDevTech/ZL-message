@@ -1,0 +1,243 @@
+/* Modal Styles */
+.modal {
+display: flex;
+position: fixed;
+z-index: 1;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(95, 95, 95, 0.671);
+justify-content: center;
+align-items: center;
+}
+
+.modalContent {
+display: flex;
+border-radius: 1rem;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+gap: 0.5rem;
+margin: 0 auto;
+background-color: #fefefe;
+width: 60%;
+border: 0.3rem solid rgba(0, 0, 0, 0.514);
+padding: 2rem;
+}
+
+.close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.623);
+    float: right;
+    font-size: 4rem;
+    transition: 0.3s
+}
+
+.close:hover,
+.close:focus {
+    color: #ff204e;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.inputEndChat{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.buttonsEndChat{
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.yesclosure, .noclosure {
+min-width: 15rem;
+font-size: 1.8rem;
+color: white;
+padding: 1rem 2rem; /* Adicionei padding nos lados para dar mais espaço */
+cursor: pointer;
+border-radius: 2rem;
+transition: all 0.3s; /* Transição suave para todos os estilos */
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra inicial */
+}
+
+.yesclosure:hover, .noclosure:hover {
+transform: translateY(-3px); /* Levantar o botão ao passar o mouse */
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Aumentar a sombra ao passar o mouse */
+}
+
+.yesclosure {
+background-color: turquoise;
+}
+
+.yesclosure:hover {
+background-color: rgb(0, 124, 112);
+}
+
+.noclosure {
+background-color: #ff204e;
+}
+
+.noclosure:hover {
+background-color: #b10023;
+}
+  
+
+.endChatnoReason{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.endChatnoReason h3{
+    font-size: 1.8rem;
+}
+
+.inputMotivoEndChat{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.inputMotivoEndChat textarea {
+width: 100%;
+min-width: 30rem;
+height: 15rem;
+padding: 1rem;
+outline: none;
+border: 0.2rem solid rgba(0, 0, 0, 0.1);
+border-radius: 1rem;
+background-color: #f5f5f5; 
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para uma aparência mais elevada */
+font-size: 1.6rem; 
+line-height: 2;
+}
+
+/* Estilo ao focar */
+.inputMotivoEndChat textarea:focus, .inputMotivoEndChatMobile textarea:focus{
+border-color: #06c270; /* Cor da borda ao focar */
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra mais forte ao focar */
+}
+  
+
+
+/*Mobile*/
+.modalContentMobile{
+display: flex;
+border-radius: 1rem;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+margin: 0 auto;
+background-color: #fefefe;
+width: 90%;
+border: 0.3rem solid rgba(0, 0, 0, 0.514);
+}
+
+.inputEndChatMobile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+    width: 100%;
+    resize: none;
+}
+
+.inputEndChatMobile h3{
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.inputMotivoEndChatMobile textarea{
+    width: 100%;
+    min-width: 13rem;
+    height: 15rem;
+    padding: 1rem;
+    outline: none;
+    border: 0.2rem solid rgba(0, 0, 0, 0.555);
+    resize:none;
+    background-color: #f5f5f5; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para uma aparência mais elevada */
+    font-size: 1.6rem; 
+    line-height: 1.5;
+}
+
+.buttonsEndChatMobile {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.yesclosureMobile, .noclosureMobile {
+    font-size: 1.6rem;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 50rem;
+    padding: 0.8rem 1.2rem;
+    margin-bottom: 1rem;
+    width: 100%; /* Botões ocupam toda a largura do contêiner */
+    max-width: 15rem; /* Largura máxima para evitar expansão excessiva em dispositivos maiores */
+    text-align: center; /* Centraliza o texto horizontalmente */
+  }
+  
+  .yesclosureMobile {
+    background-color: turquoise;
+  }
+  
+  .noclosureMobile {
+    background-color: #ff204e;
+  }
+  
+  .yesclosureMobile:hover {
+    background-color: rgb(0, 124, 112);
+    transform: translateY(-3px); /* Levantar o botão ao passar o mouse */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Aumentar a sombra ao passar o mouse */
+  }
+  
+  .noclosureMobile:hover {
+    background-color: #b10023;
+    transform: translateY(-3px); /* Levantar o botão ao passar o mouse */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Aumentar a sombra ao passar o mouse */
+  }
+  
+
+.inputMotivoEndChatMobile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.endChatnoReasonMobile{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+    flex-direction: column;
+}
+
+.endChatnoReasonMobile h3{
+    font-size: 1.8rem;
+}

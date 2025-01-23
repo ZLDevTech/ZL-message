@@ -1,0 +1,49 @@
+.btn {
+    padding: 1rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .btn.primary {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .btn.secondary {
+    background-color: #FF5722;
+    color: white;
+  }
+  
+  .btn.default {
+    background-color: #2195f3bd;
+    color: white;
+  }
+  
+  .btn:hover {
+    transform: scale(1.03);
+  }
+  
+  .btn.primary:hover {
+    background-color: #45a049;
+  }
+  
+  .btn.secondary:hover {
+    background-color: #e64a19;
+  }
+  
+  .btn.default:hover {
+    background-color: #1976d2cc;
+  }
+  
+  .btn:active {
+    transform: scale(0.98);
+  }
+  
+  .btn:disabled {
+    background-color: #BDBDBD;
+    cursor: not-allowed;
+  }

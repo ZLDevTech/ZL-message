@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { mutate } from "swr";
 
 import Message from "../message/Message";
+import Btn from "../btn/btn";
 import "./ChatBody.css";
 
 const fetcher_mensagens_chat = (url, mensagensAtendimentoBody) =>
@@ -32,7 +33,7 @@ function ChatBody({
     chatId: chatId,
   };
   const [checkRecebimentoMessage, setCheckRecebimentoMessage] = useState(false);
-  const [backgroundImageNight, setBackGroundImageNight]= useState(null);
+  const [backgroundImageNight, setBackGroundImageNight] = useState(null);
   const refBody = useRef("");
   // console.log(newMessageChat);
   // console.log(messageReceived);
@@ -40,13 +41,15 @@ function ChatBody({
   // console.log(chatId);
 
   //night mode:
-  useEffect(()=>{
-    if(nightMode){
-      setBackGroundImageNight('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGk7AUboWxoesi54sV9_ByLJsdOZJ6PR_2jg&s');
-    }else{
-      setBackGroundImageNight(null)
+  useEffect(() => {
+    if (nightMode) {
+      setBackGroundImageNight(
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGk7AUboWxoesi54sV9_ByLJsdOZJ6PR_2jg&s"
+      );
+    } else {
+      setBackGroundImageNight(null);
     }
-  }, [nightMode])
+  }, [nightMode]);
 
   if (chatId == newMessageChat?.chat_id) {
     mutate(`${url}/int/getChatMessages`);
@@ -115,7 +118,14 @@ function ChatBody({
   return (
     <>
       {mobile === "true" ? (
-        <div className="containerChatBodyMobile" style={{backgroundSize: "cover", backgroundImage: `url(${backgroundImageNight})`}} ref={refBody}>
+        <div
+          className="containerChatBodyMobile"
+          style={{
+            backgroundSize: "cover",
+            backgroundImage: `url(${backgroundImageNight})`,
+          }}
+          ref={refBody}
+        >
           {mensagens.messages?.map((item) => (
             <Message
               key={item.id}
@@ -141,7 +151,17 @@ function ChatBody({
           ))}
         </div>
       ) : (
-        <div className="containerChatBody" style={{backgroundSize: "contain", backgroundImage: `url(${backgroundImageNight})`}} ref={refBody}>
+        <div
+          className="containerChatBody"
+          style={{
+            backgroundSize: "contain",
+            backgroundImage: `url(${backgroundImageNight})`,
+          }}
+          ref={refBody}
+        >
+          {/* <div className="containerBtnHistorico">
+            <Btn txtBtn="Carregar mensagens anteriores..." typeBtn="default" dadosAtendimentos={""} />
+          </div> */}
           {mensagens.messages?.map((item) => (
             <Message
               key={item.id}

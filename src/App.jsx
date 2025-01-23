@@ -271,7 +271,7 @@ function App() {
   function IsMobile() {
     return /Android|iPhone/i.test(navigator.userAgent);
   }
-  console.log(chat);
+  // console.log(chat);
   // console.log(IsMobile());
   // console.log(navigator.userAgent);
   // const fullurl = window.location.href;

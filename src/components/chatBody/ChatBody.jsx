@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import { mutate } from "swr";
+import { FaArrowDownWideShort } from "react-icons/fa6";
 
 import Message from "../message/Message";
 import Btn from "../btn/btn";
@@ -25,20 +26,19 @@ function ChatBody({
   messageReceived,
   messageLida,
   nightMode,
+  clientId,
 }) {
   //Body da requisição de busca de mensagens do atendimento
+  const [chatIdSearch, setChatIdSearch] = useState(chatId);
+  const [messagesHistory, setMessagesHistory] = useState({});
   const mensagensAtendimentoBody = {
     queueId: queueId,
     apiKey: apiKey,
-    chatId: chatId,
+    chatId: chatIdSearch,
   };
-  const [checkRecebimentoMessage, setCheckRecebimentoMessage] = useState(false);
   const [backgroundImageNight, setBackGroundImageNight] = useState(null);
+  const [dataHistoryChat, setDataHistoryChat] = useState([]);
   const refBody = useRef("");
-  // console.log(newMessageChat);
-  // console.log(messageReceived);
-  // console.log(messageLida);
-  // console.log(chatId);
 
   //night mode:
   useEffect(() => {
@@ -51,24 +51,37 @@ function ChatBody({
     }
   }, [nightMode]);
 
-  if (chatId == newMessageChat?.chat_id) {
+  // Buscar histórico de mensagens do cliente
+  useEffect(() => {
+    const searchHistory = async () => {
+      try {
+        fetch(`${url}/int/getClientChatHistory`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            queueId: queueId,
+            apiKey: apiKey,
+            clientId: clientId,
+          }),
+        })
+          .then((resp) => resp.json())
+          .then((data) => {
+            setDataHistoryChat(data);
+          });
+      } catch (error) {
+        console.error(
+          "Erro ao buscar historico de atendimento para o cliente " + error
+        );
+      }
+    };
+    searchHistory();
+  }, [clientId]);
+
+  useEffect(() => {
     mutate(`${url}/int/getChatMessages`);
-    // console.log("Mensagens atualizadas (cliente)");
-  }
-
-  if (chatId == messageReceived?.chat_id) {
-    setTimeout(() => {
-      mutate(`${url}/int/getChatMessages`);
-      // console.log("Cliente recebeu mensagem");
-    }, 2000);
-  }
-
-  if (chatId == messageLida?.chat_id) {
-    setTimeout(() => {
-      mutate(`${url}/int/getChatMessages`);
-      // console.log("Cliente leu mensagem");
-    }, 2000);
-  }
+  }, [chatIdSearch]);
 
   //Requisição para buscar as mensagens
   const {
@@ -84,36 +97,73 @@ function ChatBody({
       revalidateIfStale: true,
     }
   );
-  // console.log(mensagens);
-  // console.log(err_mensagens)
+
+  //Função para atualizar ou limpar o histórico de mensagens
+  const updateMessagesHistory = (newMessages) => {
+    setMessagesHistory((prevHistory) => {
+      const updatedHistory = { ...prevHistory };
+
+      if (updatedHistory[clientId]) {
+        // Para cada nova mensagem, verificar se o id já existe no histórico
+        newMessages?.forEach((newMessage) => {
+          const existingMessageIndex = updatedHistory[clientId]?.findIndex(
+            (msg) => msg?.id === newMessage?.id
+          );
+
+          if (existingMessageIndex !== -1) {
+            // Se a mensagem já existir, substituímos a mensagem antiga pela nova
+            updatedHistory[clientId][existingMessageIndex] = newMessage;
+          } else {
+            // Se a mensagem não existir, adicionamos ela
+            updatedHistory[clientId].push(newMessage);
+          }
+        });
+      } else {
+        // Se não houver histórico, adiciona as novas mensagens
+        updatedHistory[clientId] = [...newMessages];
+      }
+      return updatedHistory;
+    });
+  };
+
+  useEffect(() => {
+    if (mensagens) {
+      updateMessagesHistory(mensagens.messages);
+    }
+  }, [mensagens]);
+
+  // Limpando as mensagens quando o clientId mudar
+  useEffect(() => {
+    setMessagesHistory({}); // Limpa o histórico de mensagens ao trocar o clientId
+  }, [clientId]);
 
   //Realiza a rolagem da tela até o final quando necessario
   useEffect(() => {
     if (refBody.current) {
       refBody.current.scrollTop = refBody.current.scrollHeight;
     }
-  }, [mensagens]);
+  }, [mensagens, messagesHistory]);
+  function scrollScreen() {
+    if (refBody.current) {
+      refBody.current.scrollTop = refBody.current.scrollHeight;
+    }
+  }
+
+  useEffect(() => {
+    if (
+      chatId == newMessageChat?.chat_id ||
+      chatId == messageReceived?.chat_id ||
+      chatId == messageLida?.chat_id
+    ) {
+      setChatIdSearch(chatId);
+      mutate(`${url}/int/getChatMessages`);
+    }
+  }, [newMessageChat, messageReceived, messageLida]);
 
   //Mensagem de carregamento
   if (isLoading) {
-    return <p>carregando</p>;
+    return <p>Carregando...</p>;
   }
-
-  //TENTATIVA DE REFERENCIAR MENSAGENS
-  // useEffect(() => {
-  //   if (mensagens?.messages) {
-  //     setValuesList(mensagens.messages.map(item => item));
-  //   }
-  // }, [mensagens]);
-  // console.log(valuesList)
-  // useEffect(() => {
-  //   if (valuesList && referenceMessageId) {
-  //     const foundMessage = valuesList.find(item => item?.messageid === referenceMessageId);
-  //     if (foundMessage) {
-  //       setTextReference(foundMessage?.message);
-  //     }
-  //   }
-  // }, [valuesList, referenceMessageId]);
 
   return (
     <>
@@ -126,29 +176,42 @@ function ChatBody({
           }}
           ref={refBody}
         >
-          {mensagens.messages?.map((item) => (
-            <Message
-              key={item.id}
-              user={item.direction}
-              message={item.message}
-              fk_file={item.fk_file}
-              file_mimetype={item.file_mimetype}
-              file_name={item.file_name}
-              url={url}
-              queueId={queueId}
-              apiKey={apiKey}
-              srvrcvtime={item.srvrcvtime}
-              mobile={mobile}
-              clientrcvtime={item.clientrcvtime}
-              clientreadtime={item.clientreadtime}
-              quotedtext={item.quotedtext}
-              deleted={item.deleted}
-              id_message={item.messageid}
-              id_referenceMessage={item?.quotedid}
-              chatId={chatId}
-              messageTeste={mensagens}
+          <div className="containerBtnHistorico">
+            <Btn
+              dataHistoryChat={dataHistoryChat}
+              setChatIdSearch={setChatIdSearch}
             />
-          ))}
+          </div>
+          {messagesHistory[clientId]
+            ?.sort((a, b) => {
+              return a.messagetimestamp - b.messagetimestamp;
+            })
+            ?.map((item) => (
+              <Message
+                key={`${clientId}-${chatId}-${item.id}`}
+                user={item?.direction}
+                message={item?.message}
+                fk_file={item?.fk_file}
+                file_mimetype={item?.file_mimetype}
+                file_name={item?.file_name}
+                url={url}
+                queueId={queueId}
+                apiKey={apiKey}
+                srvrcvtime={item?.srvrcvtime}
+                mobile={mobile}
+                clientrcvtime={item?.clientrcvtime}
+                clientreadtime={item?.clientreadtime}
+                quotedtext={item?.quotedtext}
+                deleted={item?.deleted}
+                id_message={item?.messageid}
+                id_referenceMessage={item?.quotedid}
+                chatId={chatId}
+                messageTeste={mensagens}
+              />
+            ))}
+          <div className="currentService">
+            <FaArrowDownWideShort onClick={scrollScreen} />
+          </div>
         </div>
       ) : (
         <div
@@ -159,31 +222,42 @@ function ChatBody({
           }}
           ref={refBody}
         >
-          {/* <div className="containerBtnHistorico">
-            <Btn txtBtn="Carregar mensagens anteriores..." typeBtn="default" dadosAtendimentos={""} />
-          </div> */}
-          {mensagens.messages?.map((item) => (
-            <Message
-              key={item.id}
-              user={item.direction}
-              message={item.message}
-              fk_file={item.fk_file}
-              file_mimetype={item.file_mimetype}
-              file_name={item.file_name}
-              url={url}
-              queueId={queueId}
-              apiKey={apiKey}
-              srvrcvtime={item.srvrcvtime}
-              clientrcvtime={item.clientrcvtime}
-              clientreadtime={item.clientreadtime}
-              quotedtext={item.quotedtext}
-              deleted={item.deleted}
-              id_message={item.messageid}
-              id_referenceMessage={item?.quotedid}
-              chatId={chatId}
-              messageTeste={mensagens}
+          <div className="containerBtnHistorico">
+            <Btn
+              dataHistoryChat={dataHistoryChat}
+              setChatIdSearch={setChatIdSearch}
             />
-          ))}
+          </div>
+          {messagesHistory[clientId]
+            ?.sort((a, b) => {
+              return a.messagetimestamp - b.messagetimestamp;
+            })
+            ?.map((item) => (
+              <Message
+                key={`${clientId}-${chatId}-${item.id}`}
+                user={item?.direction}
+                message={item?.message}
+                fk_file={item?.fk_file}
+                file_mimetype={item?.file_mimetype}
+                file_name={item?.file_name}
+                url={url}
+                queueId={queueId}
+                apiKey={apiKey}
+                srvrcvtime={item?.srvrcvtime}
+                mobile={mobile}
+                clientrcvtime={item?.clientrcvtime}
+                clientreadtime={item?.clientreadtime}
+                quotedtext={item?.quotedtext}
+                deleted={item?.deleted}
+                id_message={item?.messageid}
+                id_referenceMessage={item?.quotedid}
+                chatId={chatId}
+                messageTeste={mensagens}
+              />
+            ))}
+          <div className="currentService">
+            <FaArrowDownWideShort onClick={scrollScreen} />
+          </div>
         </div>
       )}
     </>

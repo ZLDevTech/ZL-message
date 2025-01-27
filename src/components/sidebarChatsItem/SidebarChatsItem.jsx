@@ -52,10 +52,10 @@ function SidebarChatsItem({
       photo: photo,
     };
     setTimeout(() => {
+      mutate(`${url}/int/getChatMessages`);
       removeFromChatList(id);
       setUserChat(userChat);
       setSearch(null);
-      mutate(`${url}/int/getChatMessages`);
     }, 1000);
   }
 

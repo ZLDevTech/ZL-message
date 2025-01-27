@@ -121,7 +121,6 @@ function Message({
         }
   
         const blob = await response.blob();
-        console.log(blob);
   
         if (file_mimetype === "image/jpeg") {
           setImageBlob(blob);

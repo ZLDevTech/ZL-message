@@ -22,6 +22,48 @@
     align-items: center;
 }
 
+.nullMessage{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nullMessage p {
+    font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 1.6rem; /* Ajuste do tamanho para um visual mais balanceado */
+    font-weight: bold;
+    line-height: 1.6; /* Melhora a legibilidade */
+    text-align: center; /* Centraliza o texto */
+    color: #333; /* Cor de texto neutra e elegante */
+    background-color: #f4f4f9cb; /* Cor de fundo suave */
+    padding: 1.2rem; /* Espaçamento interno */
+    border-radius: 1rem; /* Bordas arredondadas para suavizar */
+    border: 1px solid #9e9e9e; /* Borda suave e discreta */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.164); /* Sombra leve para dar profundidade */
+    max-width: 600px; /* Limita a largura para melhorar o design */
+    margin: 2rem auto; /* Centraliza o bloco e adiciona margem */
+    text-transform: capitalize; /* Para deixar o texto mais elegante */
+}
+
+.currentService {
+    position: fixed; /* Fixa o elemento na tela */
+    bottom: 6.3rem; /* Ajusta a distância da parte inferior da tela */
+    right: 1.5rem; /* Ajusta a distância da parte direita da tela */
+    z-index: 999; /* Garante que o ícone fique sobre outros elementos */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.7); /* Leve fundo transparente para destacar o ícone */
+    padding: 5px;
+    border-radius: 50%; /* Torna o fundo arredondado, se desejado */
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .currentService:hover {
+    transform: scale(1.1); /* Aumenta ligeiramente o ícone */
+    background-color: rgba(255, 255, 255, 0.9); /* Muda o fundo para um tom mais claro */
+  }
 
 /*Mobile*/
 

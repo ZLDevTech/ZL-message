@@ -124,7 +124,8 @@ function ChatFooder({
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
-      const mediaRecorder = new MediaRecorder(stream);
+      const options = { mimeType: "audio/ogg; codecs=opus" };
+      const mediaRecorder = new MediaRecorder(stream, options);
       mediaRecorderRef.current = mediaRecorder;
       mediaStreamRef.current = stream;
       mediaRecorder.ondataavailable = async (e) => {
@@ -231,15 +232,7 @@ function ChatFooder({
     return notifyInfoError(textInfoError);
   }
 
-  // console.log(nameFile);
-  // console.log(widthfile);
-  // console.log(heightfile);
-  //console.log(duration);
-  // console.log(mimeType);
-  //console.log(fileSize);
-  // // console.log(base64Data);
-
-  function handleSendMessage(e) {
+  const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!selectedFile && !audioURL) {
       if (message.length > 0) {
@@ -304,7 +297,7 @@ function ChatFooder({
           handleModalClose();
         });
     }
-  }
+  };
 
   function handleKeyPress(e) {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -461,15 +454,15 @@ function ChatFooder({
           <RiLoader3Fill className="btnSendFilesNuul" title="Carregando..." />
         ) : (
           <div className="btnFiles">
-            <BsFillSendCheckFill
-              className="btnSendFiles"
-              onClick={handleSendMessage}
-              title="Enviar"
-            />
             <TbSendOff
               className="btnEndFiles"
               onClick={handleModalClose}
               title="Cancelar"
+            />
+            <BsFillSendCheckFill
+              className="btnSendFiles"
+              onClick={handleSendMessage}
+              title="Enviar"
             />
           </div>
         )}

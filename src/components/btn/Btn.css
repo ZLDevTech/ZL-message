@@ -1,14 +1,22 @@
+.containerBtn{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1%;
+  margin-top: 0.5rem;
+}
 .btn {
-    padding: 1rem;
-    font-size: 1.6rem;
+    padding: 0.8rem;
+    font-size: 1.5rem;
     font-weight: 600;
     border: none;
-    border-radius: 8px;
+    border-radius: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
   }
   
-  .btn.primary {
+  .btn.next {
     background-color: #4CAF50;
     color: white;
   }
@@ -18,7 +26,7 @@
     color: white;
   }
   
-  .btn.default {
+  .btn.back {
     background-color: #2195f3bd;
     color: white;
   }
@@ -27,7 +35,7 @@
     transform: scale(1.03);
   }
   
-  .btn.primary:hover {
+  .btn.next:hover {
     background-color: #45a049;
   }
   
@@ -35,7 +43,7 @@
     background-color: #e64a19;
   }
   
-  .btn.default:hover {
+  .btn.back:hover {
     background-color: #1976d2cc;
   }
   

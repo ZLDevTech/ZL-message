@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { MdAccountCircle, MdAddCircle } from "react-icons/md";
 import { mutate } from "swr";
-import InputNewChat from "../promptMessages/InputNewChat";
+import InputNewChat from "../inputNewChat/InputNewChat";
 import { RiLoader3Fill } from "react-icons/ri";
 import InputSearch from "../search/InputSearch";
 import { CiSearch } from "react-icons/ci";
@@ -33,8 +33,6 @@ function SidebarHeader({
   const [colorNight, setColorNight]= useState("black")
   //Body da requisição de novo chat:
   const bodyNewChat = { queueId: queueId, apiKey: apiKey, number: newNumber };
-  // const [visibleMessageFleg, setVisibleMessageFleg]= useState(false);
-  // const[typeMessageFleg, setTypeMessageFleg]= useState("");
   const [visibleInputSearch, setVisibleInputSearch] = useState(false);
 
   function update() {
@@ -80,7 +78,6 @@ function SidebarHeader({
       })
         .then((resp) => resp.json())
         .then((data) => {
-          // console.log(data?.message);
           setVisibleInput(false);
           if (data?.message == "success") {
             let textInfoSuccess = `Chat aberto! ${newNumber}`;

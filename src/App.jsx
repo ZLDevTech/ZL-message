@@ -46,7 +46,6 @@ function App() {
   const [messageLida, setMessageLida] = useState(null);
   const [nightMode, setNightMode] = useState(false);
   const [ocultarChatsEmUra, setOcultarChatsEmUra] = useState(true);
-  // console.log(userChat);
 
   useEffect(() => {
     const key = "f5b7d9a1-b23a-4b6b-b4fc-cc3a07d8bc91";
@@ -64,7 +63,6 @@ function App() {
     // console.log("Fila criptografado:", fila);
     // console.log("APIKEY criptografado: ", apikey);
     // console.log("Usuario criptografado: ", user);
-    //Descriptografando:
     if (instancia && fila && apikey) {
       setUrl(decryptData(instancia));
       setQueueId(decryptData(fila));
@@ -243,7 +241,7 @@ function App() {
       revalidateOnReconnect: true,
       revalidateIfStale: true,
     }
-  ); // console.log(statusFila);
+  );
 
   //BUSCA PELOS DETALHES DE ATENDIMENTOS:
   //Body da requisição de busca:

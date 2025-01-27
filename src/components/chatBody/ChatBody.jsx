@@ -4,7 +4,7 @@ import { mutate } from "swr";
 import { FaArrowDownWideShort } from "react-icons/fa6";
 
 import Message from "../message/Message";
-import Btn from "../btn/btn";
+import Btn from "../btn/Btn";
 import "./ChatBody.css";
 
 const fetcher_mensagens_chat = (url, mensagensAtendimentoBody) =>

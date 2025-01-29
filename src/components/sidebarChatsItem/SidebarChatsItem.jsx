@@ -17,7 +17,6 @@ function SidebarChatsItem({
   isChatIdIncluded,
   removeFromChatList,
   openNewChat,
-  newMessageChat,
 }) {
   const digitsOnly = number.replace(/\D/g, "");
   const [displayNotification, setDisplayNotification] = useState(false);
@@ -72,7 +71,7 @@ function SidebarChatsItem({
 
   return (
     <>
-      {isChatIdIncluded && newMessageChat?.user_id != 0 ? (
+      {isChatIdIncluded ? (
         <>
           {search == numberValidado ? (
             <>

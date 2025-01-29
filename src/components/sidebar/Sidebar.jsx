@@ -111,7 +111,9 @@ function Sidebar({
           </div>
           {sortedChats?.map((item) => {
             const isChatIdIncluded = Array.from(allChatIds).some(
-              (id) => Number(id) === Number(item.chatId)
+              (id) =>
+                Number(id) === Number(item.chatId) &&
+                newMessageChat?.user_id != 0
             );
             return (
               <SidebarChats
@@ -134,7 +136,6 @@ function Sidebar({
                 removeFromChatList={removeFromChatList}
                 openNewChat={openNewChat}
                 nightMode={nightMode}
-                newMessageChat={newMessageChat}
               />
             );
           })}
@@ -175,7 +176,9 @@ function Sidebar({
           </div>
           {sortedChats?.map((item) => {
             const isChatIdIncluded = Array.from(allChatIds).some(
-              (id) => Number(id) === Number(item.chatId)
+              (id) =>
+                Number(id) === Number(item.chatId) &&
+                newMessageChat?.user_id != 0
             );
             return (
               <SidebarChats
@@ -198,7 +201,6 @@ function Sidebar({
                 removeFromChatList={removeFromChatList}
                 openNewChat={openNewChat}
                 nightMode={nightMode}
-                newMessageChat={newMessageChat}
               />
             );
           })}

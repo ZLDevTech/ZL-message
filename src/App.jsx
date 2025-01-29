@@ -164,17 +164,18 @@ function App() {
         setNewMessageChat(data);
         if (ocultarChatsEmUra) {
           if (data?.user_id != 0) {
+            setNewMessageChat(data);
             setPlayNotification(true);
             notifyInfoNewMessage({ data });
             setTimeout(() => {
               setPlayNotification(false);
             }, 1000);
-          }
-          //  else {
+          } //  else {
           //   console.log(`${data?.numero_cliente}, está na URA`);
           // }
         } else {
           setPlayNotification(true);
+          setNewMessageChat(data);
           notifyInfoNewMessage({ data });
           setTimeout(() => {
             setPlayNotification(false);

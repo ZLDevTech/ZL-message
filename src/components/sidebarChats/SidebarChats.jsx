@@ -17,7 +17,6 @@ function SidebarChats({
   removeFromChatList,
   openNewChat,
   nightMode,
-  newMessageChat,
 }) {
   //Body da requisição foto dos clientes
   let photoChatsBody = [{ queueId: queueId, apiKey: apiKey, chatId: id }];
@@ -73,7 +72,6 @@ function SidebarChats({
           isChatIdIncluded={isChatIdIncluded}
           removeFromChatList={removeFromChatList}
           openNewChat={openNewChat}
-          newMessageChat={newMessageChat}
         />
       </div>
     </div>

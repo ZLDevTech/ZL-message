@@ -62,7 +62,23 @@ function Sidebar({
 
   // Função de ordenação
   const sortedChats = (chat?.chats || []).slice().sort((a, b) => {
-    if (orderBy === "default") {
+    if (orderBy === "lastNotification") {
+      // Verifica se a conversa tem isChatIdIncluded
+      const isAIncluded = Array.from(allChatIds).some(
+        (id) => Number(id) === Number(a.chatId) && newMessageChat?.user_id !== 0
+      );
+      const isBIncluded = Array.from(allChatIds).some(
+        (id) => Number(id) === Number(b.chatId) && newMessageChat?.user_id !== 0
+      );
+
+      // Se uma das conversas tem isChatIdIncluded, coloca ela antes
+      if (isAIncluded && !isBIncluded) {
+        return -1; // a vem antes de b
+      }
+      if (!isAIncluded && isBIncluded) {
+        return 1; // b vem antes de a
+      }
+    } else if (orderBy === "default") {
       // Ordenação pela clientId (como estava antes)
       return Number(a.chatId) - Number(b.chatId);
     } else if (orderBy === "lastMessage") {
@@ -103,10 +119,13 @@ function Sidebar({
               id="orderBySelect"
               onChange={handleOrderChange}
               value={orderBy}
-              title=" Obs: Ordem Padrão: Últimos atendimentos sempre no final."
+              title="Ordem Padrão: Últimos atendimentos sempre no final.
+Última Mensagem Recebida: Ordena pelos clientes que mandaram mensagens mais recentes.
+Notificações Pendentes: Ordena por notificações não abertas."
             >
               <option value="default">Ordem Padrão</option>
               <option value="lastMessage">Última Mensagem Recebida</option>
+              <option value="lastNotification">Notificações Pendentes</option>
             </select>
           </div>
           {sortedChats?.map((item) => {
@@ -168,10 +187,13 @@ function Sidebar({
               id="orderBySelect"
               onChange={handleOrderChange}
               value={orderBy}
-              title=" Obs: Ordem Padrão: Últimos atendimentos sempre no final."
+              title="Ordem Padrão: Últimos atendimentos sempre no final.
+Última Mensagem Recebida: Ordena pelos clientes que mandaram mensagens mais recentes.
+Notificações Pendentes: Ordena por notificações não abertas."
             >
               <option value="default">Ordem Padrão</option>
               <option value="lastMessage">Última Mensagem Recebida</option>
+              <option value="lastNotification">Notificações Pendentes</option>
             </select>
           </div>
           {sortedChats?.map((item) => {

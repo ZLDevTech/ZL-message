@@ -161,7 +161,6 @@ function App() {
       });
 
       socket.on("webhookNewMessage", (data) => {
-        setNewMessageChat(data);
         if (ocultarChatsEmUra) {
           if (data?.user_id != 0) {
             setNewMessageChat(data);

@@ -51,6 +51,22 @@ function ChatBody({
     }
   }, [nightMode]);
 
+  if (chatId == newMessageChat?.chat_id) {
+    mutate(`${url}/int/getChatMessages`);
+  }
+
+  if (chatId == messageReceived?.chat_id || chatId == messageLida?.chat_id) {
+    setTimeout(() => {
+      mutate(`${url}/int/getChatMessages`);
+    }, 2000);
+  }
+
+  // if (chatId == messageLida?.chat_id) {
+  //   setTimeout(() => {
+  //     mutate(`${url}/int/getChatMessages`);
+  //   }, 2000);
+  // }
+
   // Buscar histórico de mensagens do cliente
   useEffect(() => {
     const searchHistory = async () => {
@@ -148,17 +164,6 @@ function ChatBody({
       refBody.current.scrollTop = refBody.current.scrollHeight;
     }
   }
-
-  useEffect(() => {
-    if (
-      chatId == newMessageChat?.chat_id ||
-      chatId == messageReceived?.chat_id ||
-      chatId == messageLida?.chat_id
-    ) {
-      setChatIdSearch(chatId);
-      mutate(`${url}/int/getChatMessages`);
-    }
-  }, [newMessageChat, messageReceived, messageLida]);
 
   //Mensagem de carregamento
   if (isLoading) {

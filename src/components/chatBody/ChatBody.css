@@ -48,13 +48,13 @@
 
 .currentService {
     position: fixed; /* Fixa o elemento na tela */
-    bottom: 6.3rem; /* Ajusta a distância da parte inferior da tela */
-    right: 1.5rem; /* Ajusta a distância da parte direita da tela */
+    bottom: 8rem; /* Ajusta a distância da parte inferior da tela */
+    right: 1rem; /* Ajusta a distância da parte direita da tela */
     z-index: 999; /* Garante que o ícone fique sobre outros elementos */
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.7); /* Leve fundo transparente para destacar o ícone */
+    background-color: rgba(255, 255, 255, 0.349); /* Leve fundo transparente para destacar o ícone */
     padding: 5px;
     border-radius: 50%; /* Torna o fundo arredondado, se desejado */
     cursor: pointer;

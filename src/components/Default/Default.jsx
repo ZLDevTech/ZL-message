@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import "./Default.css";
 import { FcAlarmClock, FcCalendar } from "react-icons/fc";
-import { MdMessage } from "react-icons/md";
+// import { MdMessage } from "react-icons/md";
+import { BiChat } from "react-icons/bi";
 
 function Default({ nightMode }) {
   const [time, setTime] = useState(new Date());
@@ -23,12 +24,15 @@ function Default({ nightMode }) {
   useEffect(() => {
     function obterLocalizacao() {
       if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          setLatitude(position.coords.latitude);
-          setLongitude(position.coords.longitude);
-        }, (error) => {
-          console.error("Erro ao obter localização", error);
-        });
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            setLatitude(position.coords.latitude);
+            setLongitude(position.coords.longitude);
+          },
+          (error) => {
+            console.error("Erro ao obter localização", error);
+          }
+        );
       } else {
         console.error("Geolocalização não suportada pelo navegador.");
       }
@@ -100,7 +104,8 @@ function Default({ nightMode }) {
         )}
       </div>
       <div className="img">
-        <MdMessage />
+        {/* <MdMessage /> */}
+        <BiChat/>
       </div>
       {time.toLocaleTimeString() >= "06:00:00" &&
       time.toLocaleTimeString() <= "11:59:59" ? (

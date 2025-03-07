@@ -127,9 +127,14 @@ function App() {
       //Dados obrigatorios em todos Webhooks: instancia, fila.
       // Configurar opções do cliente Socket.IO https://sandbox.zltecnologia.com.br http://localhost:8006
       const socket = io("https://webhook.startsend.com.br", {
-        // path: "/webhook/webhook", // Certifique-se de que está usando o caminho correto
+        transports: ["websocket"],
         secure: true,
-        timeout: 10000,
+        timeout: 20000,
+        reconnectionAttempts: 20, // Tentativas de reconexão
+        reconnectionDelay: 5000, // Delay entre as tentativas de reconexão
+        reconnectionDelayMax: 10000, // Máximo de delay entre tentativas
+        pingInterval: 60000, // Envia ping para o servidor a cada 25 segundos
+        pingTimeout: 120000, // Espera até 60 segundos para receber um pong
       });
       socket.emit("joinRoom", { url, queueId });
 
@@ -141,6 +146,15 @@ function App() {
 
       socket.on("disconnect", () => {
         console.log("Desconectado do servidor Socket.IO");
+      });
+
+      //Reconectando
+      socket.on("reconnect", () => {
+        console.log("Reconectado ao servidor!");
+        socket.emit("joinRoom", { url, queueId }); // Reentrar na sala após reconectar
+      });
+      socket.on("reconnect_attempt", () => {
+        console.log("Tentando reconectar...");
       });
 
       // Evento de erro de conexão
@@ -168,6 +182,7 @@ function App() {
             notifyInfoNewMessage({ data });
             setTimeout(() => {
               setPlayNotification(false);
+              setNewMessageChat(null);
             }, 1000);
           } //  else {
           //   console.log(`${data?.numero_cliente}, está na URA`);
@@ -178,6 +193,7 @@ function App() {
           notifyInfoNewMessage({ data });
           setTimeout(() => {
             setPlayNotification(false);
+            setNewMessageChat(null);
           }, 1000);
         }
       });
@@ -195,10 +211,10 @@ function App() {
       });
 
       socket.on("webhookmsgReceivedByServerHook", (data) => {
+        setMessageReceived(data);
         setTimeout(() => {
-          mutate(`${url}/int/getChatMessages`);
-          // console.log("Mensagens atualizadas (operador)");
-        }, 2000);
+          setMessageReceived(null);
+        }, 1000);
       });
 
       socket.on("webhookmsgSentHook", (data) => {
@@ -209,22 +225,43 @@ function App() {
       socket.on("webhookmsgReceivedByUserHook", (data) => {
         // console.log(data);
         setMessageReceived(data);
+        setTimeout(() => {
+          setMessageReceived(null);
+        }, 1000);
       });
 
       socket.on("webhookmsgReadedHook", (data) => {
         // console.log(data);
         setMessageLida(data);
+        setTimeout(() => {
+          setMessageLida(null);
+        }, 1000);
       });
 
       socket.on("webhookmsgDeletedHook", (data) => {
+        setMessageReceived(data);
         setTimeout(() => {
-          mutate(`${url}/int/getChatMessages`);
-          // console.log("Mensagens deletadas");
+          setMessageReceived(null);
         }, 1000);
       });
 
       return () => {
         socket.disconnect();
+        socket.off("connect");
+        socket.off("disconnect");
+        socket.off("reconnect");
+        socket.off("reconnect_attempt");
+        socket.off("connect_error");
+        socket.off("connect_timeout");
+        socket.off("webhookNewChat");
+        socket.off("webhookNewMessage");
+        socket.off("webhookchatClosedHook");
+        socket.off("webhookauthStatusHook");
+        socket.off("webhookmsgReceivedByServerHook");
+        socket.off("webhookmsgSentHook");
+        socket.off("webhookmsgReceivedByUserHook");
+        socket.off("webhookmsgReadedHook");
+        socket.off("webhookmsgDeletedHook");
       };
     }
   }, [url, queueId, ocultarChatsEmUra]);

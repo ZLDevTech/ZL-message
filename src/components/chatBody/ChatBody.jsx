@@ -51,21 +51,15 @@ function ChatBody({
     }
   }, [nightMode]);
 
-  if (chatId == newMessageChat?.chat_id) {
-    mutate(`${url}/int/getChatMessages`);
-  }
-
-  if (chatId == messageReceived?.chat_id || chatId == messageLida?.chat_id) {
-    setTimeout(() => {
-      mutate(`${url}/int/getChatMessages`);
+  if (
+    chatId == messageReceived?.chat_id ||
+    chatId == messageLida?.chat_id ||
+    chatId == newMessageChat?.chat_id
+  ) {
+    setTimeout(async () => {
+      await mutate(`${url}/int/getChatMessages`);
     }, 2000);
   }
-
-  // if (chatId == messageLida?.chat_id) {
-  //   setTimeout(() => {
-  //     mutate(`${url}/int/getChatMessages`);
-  //   }, 2000);
-  // }
 
   // Buscar histórico de mensagens do cliente
   useEffect(() => {

@@ -1,9 +1,9 @@
 import { mutate } from "swr";
 import "./SidebarChatsItem.css";
-import { FaCircle } from "react-icons/fa";
 import { MdPerson } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { MdOutlineMarkUnreadChatAlt } from "react-icons/md";
 
 function SidebarChatsItem({
   id,
@@ -88,7 +88,7 @@ function SidebarChatsItem({
                 <div
                   className={`icon_notification${displayNotification ? "" : "Hidden"}`}
                 >
-                  <FaCircle />
+                  <MdOutlineMarkUnreadChatAlt />
                 </div>
               </div>
             </>
@@ -103,7 +103,7 @@ function SidebarChatsItem({
               <div
                 className={`icon_notification${displayNotification ? "" : "Hidden"}`}
               >
-                <FaCircle />
+                <MdOutlineMarkUnreadChatAlt />
               </div>
             </div>
           )}
